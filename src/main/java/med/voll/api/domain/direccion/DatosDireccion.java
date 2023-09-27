@@ -1,4 +1,4 @@
-package med.voll.api.direccion;
+package med.voll.api.domain.direccion;
 
 import jakarta.validation.constraints.NotBlank;
 
@@ -13,4 +13,8 @@ public record DatosDireccion(
         String numero,
         @NotBlank
         String complemento) {
+
+    public DatosDireccion(Direccion direccion) {
+        this(direccion.getCalle(), direccion.getDistrito(), direccion.getCiudad(), direccion.getNumero(), direccion.getComplemento());
+    }
 }

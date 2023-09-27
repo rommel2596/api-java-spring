@@ -1,4 +1,4 @@
-package med.voll.api.paciente;
+package med.voll.api.controller;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,6 +16,11 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
+import med.voll.api.domain.paciente.DatosActualizacionPaciente;
+import med.voll.api.domain.paciente.DatosDetalladoPaciente;
+import med.voll.api.domain.paciente.DatosListadoPaciente;
+import med.voll.api.domain.paciente.DatosRegistroPaciente;
+import med.voll.api.domain.paciente.Paciente;
 
 @RestController
 @RequestMapping("/pacientes")
