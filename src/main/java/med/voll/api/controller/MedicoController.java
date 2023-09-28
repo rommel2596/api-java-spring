@@ -68,6 +68,7 @@ public class MedicoController {
 
     // Delete lógico
     @DeleteMapping("/{id}")
+    // @Secured("ROLE_ADMIN")  // Esto es para proteger el método con un rol en particular, tambien se puede poner a nivel de clase y proteger todas las rutas. Necesita activarse en SecurityConfigurations.
     @Transactional
     public ResponseEntity<Void> eliminarMedico(@PathVariable Long id) {
         Medico medico = medicoRepository.getReferenceById(id);

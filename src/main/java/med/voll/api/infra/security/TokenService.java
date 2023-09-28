@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
+import com.auth0.jwt.exceptions.JWTVerificationException;
+import com.auth0.jwt.interfaces.DecodedJWT;
 
 import med.voll.api.domain.usuarios.Usuario;
 
@@ -32,6 +34,26 @@ public class TokenService {
         } catch (JWTCreationException exception) {
             throw new RuntimeException(exception);
         }
+    }
+
+    public String getSubject(String token) {
+        if(token == null) {
+            throw new RuntimeException();
+        }
+        DecodedJWT verifier = null;
+        try {
+            Algorithm algorithm = Algorithm.HMAC256(apiSecret); // Validar signature.
+            verifier = JWT.require(algorithm)
+                .withIssuer("voll med")
+                .build()
+                .verify(token); // Verifica el token
+        } catch (JWTVerificationException e) {
+            throw new RuntimeException(e);
+        }
+        if(verifier.getSubject() == null) {
+            throw new RuntimeException("Token invalido");
+        }
+        return verifier.getSubject(); // Obtiene el usuario
     }
 
     private Instant generarFechaExpiracion() {
