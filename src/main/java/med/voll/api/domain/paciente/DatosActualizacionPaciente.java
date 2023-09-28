@@ -1,6 +1,12 @@
 package med.voll.api.domain.paciente;
 
-//TODO: Generar este DTO
-public record DatosActualizacionPaciente() {
+import jakarta.validation.constraints.NotNull;
+import med.voll.api.domain.direccion.DatosDireccion;
 
+public record DatosActualizacionPaciente(
+        @NotNull
+        Long id,
+        String nombre,
+        String telefono,
+        DatosDireccion direccion) {
 }
